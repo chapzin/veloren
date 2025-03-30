@@ -13,61 +13,13 @@ use hashbrown::HashMap;
 use itertools::Itertools;
 use keyboard_keynames::key_layout::KeyLayout;
 use serde::{Deserialize, Serialize};
-use strum::{AsRefStr, EnumIter};
 use tracing::{error, warn};
 use vek::*;
 use winit::monitor::VideoMode;
 
-/// Represents a key that the game menus recognise after input mapping
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    PartialEq,
-    Eq,
-    PartialOrd,
-    Ord,
-    Hash,
-    Deserialize,
-    Serialize,
-    AsRefStr,
-    EnumIter,
-)]
-pub enum MenuInput {
-    Up,
-    Down,
-    Left,
-    Right,
-    ScrollUp,
-    ScrollDown,
-    ScrollLeft,
-    ScrollRight,
-    Home,
-    End,
-    Apply,
-    Back,
-    Exit,
-}
-
-impl MenuInput {
-    pub fn get_localization_key(&self) -> &str { self.as_ref() }
-}
-
-#[derive(Clone, Debug, PartialEq, Deserialize, Serialize)]
-pub enum AnalogMenuInput {
-    MoveX(f32),
-    MoveY(f32),
-    ScrollX(f32),
-    ScrollY(f32),
-}
-
-#[derive(Clone, Debug, PartialEq, Deserialize, Serialize)]
-pub enum AnalogGameInput {
-    MovementX(f32),
-    MovementY(f32),
-    CameraX(f32),
-    CameraY(f32),
-}
+// Reexport from modules
+pub use crate::window_settings::{FullScreenSettings, FullscreenMode, WindowSettings};
+pub use crate::input::{AnalogGameInput, AnalogMenuInput, MenuInput};
 
 /// Represents an incoming event from the window.
 #[derive(Clone, Debug)]
@@ -1440,50 +1392,4 @@ impl Window {
     pub fn modifiers(&self) -> winit::event::ModifiersState { self.modifiers }
 
     pub fn scale_factor(&self) -> f64 { self.scale_factor }
-}
-
-#[derive(Default, Copy, Clone, Hash, Eq, PartialEq, Debug, Serialize, Deserialize)]
-pub enum FullscreenMode {
-    Exclusive,
-    #[serde(other)]
-    #[default]
-    Borderless,
-}
-
-#[derive(PartialEq, Eq, Clone, Copy, Debug, Serialize, Deserialize)]
-#[serde(default)]
-pub struct WindowSettings {
-    pub size: [u32; 2],
-    pub maximised: bool,
-}
-
-impl Default for WindowSettings {
-    fn default() -> Self {
-        Self {
-            size: [1280, 720],
-            maximised: false,
-        }
-    }
-}
-
-#[derive(PartialEq, Eq, Clone, Copy, Debug, Serialize, Deserialize)]
-#[serde(default)]
-pub struct FullScreenSettings {
-    pub enabled: bool,
-    pub mode: FullscreenMode,
-    pub resolution: [u16; 2],
-    pub bit_depth: Option<u16>,
-    pub refresh_rate_millihertz: Option<u32>,
-}
-
-impl Default for FullScreenSettings {
-    fn default() -> Self {
-        Self {
-            enabled: true,
-            mode: FullscreenMode::Borderless,
-            resolution: [1920, 1080],
-            bit_depth: None,
-            refresh_rate_millihertz: None,
-        }
-    }
 }
