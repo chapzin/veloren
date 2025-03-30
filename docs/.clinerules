@@ -1,0 +1,25 @@
+# Regras de CLI para o Projeto Veloren
+
+## Caminhos Críticos de Implementação
+- Sempre analisar completamente o arquivo antes de propor refatorações
+- Manter o comportamento original do código como prioridade máxima
+- Preservar a interface pública dos componentes refatorados
+- Considerar o impacto das refatorações nos testes existentes
+
+## Preferências de Fluxo de Trabalho do Usuário
+- Preferir refatorações incrementais que possam ser revisadas facilmente
+- Documentar claramente o propósito e benefícios de cada refatoração
+- Fornecer explicações sobre as responsabilidades identificadas
+- Sugerir nomes semânticos para novos componentes extraídos
+
+## Padrões de Uso de Ferramentas
+- Utilizar ferramentas de leitura de arquivos para análise completa do código
+- Usar buscas por padrões para identificar responsabilidades comuns
+- Empregar o pensamento sequencial para decompor problemas complexos
+- Considerar verificações de vibração para validar abordagens de refatoração
+
+## Decisões Específicas do Projeto
+- Foco primário no princípio da responsabilidade única
+- Preferência por composição sobre herança
+- Manter consistência com as convenções de código existentes
+- Considerar o desempenho ao propor refatorações em código crítico 
