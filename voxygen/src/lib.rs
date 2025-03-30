@@ -21,6 +21,7 @@ mod ecs;
 pub mod error;
 pub mod game_input;
 pub mod hud;
+pub mod input;
 pub mod key_state;
 pub mod menu;
 pub mod mesh;
@@ -34,6 +35,7 @@ pub mod settings;
 #[cfg(feature = "singleplayer")]
 pub mod singleplayer;
 pub mod window;
+pub mod window_settings;
 
 #[cfg(feature = "singleplayer")]
 use crate::singleplayer::Singleplayer;
